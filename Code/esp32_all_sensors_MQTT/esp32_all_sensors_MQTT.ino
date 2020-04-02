@@ -92,7 +92,7 @@ void loop() {
   load_3 = analogRead(loadPin_3);
   sprintf(out_load, "load: %d, %d, %d\n", load_1, load_2, load_3);
   // End Load
-  
+ 
   // Begin IMU1
   if ( imu_1.accelAvailable() )
   {
@@ -121,8 +121,8 @@ void loop() {
   // Publish MQTT
   
   sprintf(out, "%s%s%s%s", out_load, out_emg, out_1, out_2);
-  Serial.println(out);
-  Serial.println();
+  //Serial.println(out);
+  //Serial.println();
   //MQTTPublish(out);
 
   sprintf(out_accel, "%s%s", out_1, out_2);
@@ -131,7 +131,7 @@ void loop() {
   MQTTPublish("sportsLab/accel/test", out_accel);
   
   
-  delay(100);
+  delay(1);   
 
 }
 

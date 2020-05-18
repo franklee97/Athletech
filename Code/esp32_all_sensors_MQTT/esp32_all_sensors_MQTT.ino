@@ -41,7 +41,7 @@ void setup() {
   // Sets IMU1's scale to +-16g
   imu_1.setAccelScale(16);
   // End IMU1 init
-
+/*
   // Begin IMU2 init
   if (imu_2.init())
   {
@@ -60,6 +60,7 @@ void setup() {
   // Begin WIFI
   WIFISetup(deviceName);
   MQTTSetup(deviceName);
+  */
 }
 
 // Character array for output
@@ -77,7 +78,7 @@ int load_3 = 0;
 
 
 void loop() { 
-  
+  /*
   MQTTLoop();   // MQTT stuff
 
   // Begin EMG
@@ -92,7 +93,7 @@ void loop() {
   load_3 = analogRead(loadPin_3);
   sprintf(out_load, "load: %d, %d, %d\n", load_1, load_2, load_3);
   // End Load
- 
+ */
   // Begin IMU1
   if ( imu_1.accelAvailable() )
   {
@@ -103,10 +104,10 @@ void loop() {
   y = imu_1.calcAccel(imu_1.ay);
   z = imu_1.calcAccel(imu_1.az);
   sprintf(out_1, "accel_1: %f, %f, %f\n", x, y, z);
-  //Serial.print(out_1);
+  Serial.print(out_1);
   // End IMU1
 
-
+/*
   // Begin IMU2
   imu_2.read_acc();
   x = scaleCalc(imu_2.ax)/9.8;
@@ -116,8 +117,8 @@ void loop() {
   //Serial.print(out_2);
   // End IMU2
 
-  
-
+  */
+/*
   // Publish MQTT
   
   sprintf(out, "%s%s%s%s", out_load, out_emg, out_1, out_2);
@@ -130,7 +131,7 @@ void loop() {
   MQTTPublish("sportsLab/emg/test", out_emg);
   MQTTPublish("sportsLab/accel/test", out_accel);
   
-  
+  */
   delay(1);   
 
 }

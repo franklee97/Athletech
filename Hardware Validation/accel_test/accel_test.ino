@@ -14,10 +14,8 @@ void setup() {
 
 
   // Init IMU1
-  imu_1.settings.device.commInterface = IMU_MODE_I2C; // Set mode to I2C for LSM9DS1      
-  imu_1.settings.device.agAddress = 0x6B; // Set ag address to 0x6B
-  imu_1.settings.device.mAddress = 0x1E; // Set mag address to 0x1E
-  if (!imu_1.begin())
+
+  if (!imu_1.begin(0x6B, 0x1E, Wire))
   {
     Serial.println("LSM9DS1 #1 initialization failed");
     while (1)
@@ -31,10 +29,9 @@ void setup() {
   imu_1.setAccelScale(16);
 
   // Init IMU2
-  imu_2.settings.device.commInterface = IMU_MODE_I2C; // Set mode to I2C for LSM9DS1      
-  imu_2.settings.device.agAddress = 0x6A; // Set ag address to 0x6B
-  imu_2.settings.device.mAddress = 0x1C; // Set mag address to 0x1E
-  if (!imu_2.begin())
+
+
+  if (!(imu_2.begin(0x6A, 0x1C, Wire)))
   {
     Serial.println("LSM9DS1 #2 initialization failed");
     while (1)

@@ -1,0 +1,6 @@
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
+configDescList=org.eclipse.launchbar.core.descriptorType.default\:STM32L4xx-SensorTile Release,org.eclipse.launchbar.core.descriptorType.default\:blinky Debug
+eclipse.preferences.version=1
+org.eclipse.launchbar.core.descriptorType.default\:STM32L4xx-SensorTile\ Release/activeLaunchMode=debug
+org.eclipse.launchbar.core.descriptorType.default\:STM32L4xx-SensorTile\ Release/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local

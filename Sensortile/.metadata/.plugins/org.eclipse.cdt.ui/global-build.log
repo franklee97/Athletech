@@ -1,0 +1,23 @@
+15:43:32 **** Incremental Build of configuration Debug for project blinky ****
+make all 
+Building file: ../Src/main.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blinky\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DUSE_HAL_DRIVER -DSTM32L476xx -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blinky/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blinky/Drivers/STM32L4xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blinky/Drivers/STM32L4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blinky/Drivers/CMSIS/Device/ST/STM32L4xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blinky/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+Finished building: ../Src/main.c
+ 
+Building target: blinky.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -T"../STM32L476JGYx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "blinky.elf" @"objects.list"   -lm
+Finished building target: blinky.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "blinky.elf" "blinky.hex"
+arm-none-eabi-size "blinky.elf"
+   text	   data	    bss	    dec	    hex	filename
+   4360	     32	   1568	   5960	   1748	blinky.elf
+ 
+15:43:43 **** Incremental Build of configuration Debug for project blinky ****
+make all 
+make: Nothing to be done for 'all'.

@@ -1,0 +1,23 @@
+12:14:03 **** Build of configuration Debug for project i2c_library_test ****
+make all 
+Building file: ../startup/startup_stm32l476xx.s
+Invoking: MCU GCC Assembler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\i2c_library_test\Debug
+arm-none-eabi-as -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -g -o "startup/startup_stm32l476xx.o" "../startup/startup_stm32l476xx.s"
+Finished building: ../startup/startup_stm32l476xx.s
+ 
+Building file: ../Src/custom_motion_sensors.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\i2c_library_test\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DUSE_HAL_DRIVER -DSTM32L476xx -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/i2c_library_test/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/i2c_library_test/Drivers/STM32L4xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/i2c_library_test/Drivers/STM32L4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/i2c_library_test/Drivers/CMSIS/Device/ST/STM32L4xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/i2c_library_test/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/custom_motion_sensors.d" -MT"Src/custom_motion_sensors.o" -o "Src/custom_motion_sensors.o" "../Src/custom_motion_sensors.c"
+In file included from C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/i2c_library_test/Inc/custom_motion_sensors.h:30:0,
+                 from ../Src/custom_motion_sensors.c:21:
+C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/i2c_library_test/Inc/custom_mems_conf.h:30:10: fatal error: custom_bus.h: No such file or directory
+ #include "custom_bus.h"
+          ^~~~~~~~~~~~~~
+compilation terminated.
+make: *** [Src/custom_motion_sensors.o] Error 1
+Src/subdir.mk:36: recipe for target 'Src/custom_motion_sensors.o' failed
+
+12:14:04 Build Finished (took 1s.115ms)
+

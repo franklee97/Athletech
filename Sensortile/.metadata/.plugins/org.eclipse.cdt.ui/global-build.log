@@ -1,23 +1,143 @@
-15:43:32 **** Incremental Build of configuration Debug for project blinky ****
+20:32:13 **** Build of configuration Debug for project blank_f042 ****
 make all 
+Building file: ../startup/startup_stm32f042x6.s
+Invoking: MCU GCC Assembler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-as -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -g -o "startup/startup_stm32f042x6.o" "../startup/startup_stm32f042x6.s"
+Finished building: ../startup/startup_stm32f042x6.s
+ 
 Building file: ../Src/main.c
 Invoking: MCU GCC Compiler
-C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blinky\Debug
-arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DUSE_HAL_DRIVER -DSTM32L476xx -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blinky/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blinky/Drivers/STM32L4xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blinky/Drivers/STM32L4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blinky/Drivers/CMSIS/Device/ST/STM32L4xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blinky/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -DUSE_HAL_DRIVER -DSTM32F042x6 -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
 Finished building: ../Src/main.c
  
-Building target: blinky.elf
+Building file: ../Src/stm32f0xx_hal_msp.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -DUSE_HAL_DRIVER -DSTM32F042x6 -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/stm32f0xx_hal_msp.d" -MT"Src/stm32f0xx_hal_msp.o" -o "Src/stm32f0xx_hal_msp.o" "../Src/stm32f0xx_hal_msp.c"
+Finished building: ../Src/stm32f0xx_hal_msp.c
+ 
+Building file: ../Src/stm32f0xx_it.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -DUSE_HAL_DRIVER -DSTM32F042x6 -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/stm32f0xx_it.d" -MT"Src/stm32f0xx_it.o" -o "Src/stm32f0xx_it.o" "../Src/stm32f0xx_it.c"
+Finished building: ../Src/stm32f0xx_it.c
+ 
+Building file: ../Src/syscalls.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -DUSE_HAL_DRIVER -DSTM32F042x6 -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/syscalls.d" -MT"Src/syscalls.o" -o "Src/syscalls.o" "../Src/syscalls.c"
+Finished building: ../Src/syscalls.c
+ 
+Building file: ../Src/system_stm32f0xx.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -DUSE_HAL_DRIVER -DSTM32F042x6 -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/system_stm32f0xx.d" -MT"Src/system_stm32f0xx.o" -o "Src/system_stm32f0xx.o" "../Src/system_stm32f0xx.c"
+Finished building: ../Src/system_stm32f0xx.c
+ 
+Building file: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -DUSE_HAL_DRIVER -DSTM32F042x6 -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.d" -MT"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.o" -o "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.o" "../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c"
+Finished building: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c
+ 
+Building file: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -DUSE_HAL_DRIVER -DSTM32F042x6 -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.d" -MT"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.o" -o "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.o" "../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c"
+Finished building: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c
+ 
+Building file: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -DUSE_HAL_DRIVER -DSTM32F042x6 -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.d" -MT"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.o" -o "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.o" "../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c"
+Finished building: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c
+ 
+Building file: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_exti.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -DUSE_HAL_DRIVER -DSTM32F042x6 -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_exti.d" -MT"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_exti.o" -o "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_exti.o" "../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_exti.c"
+Finished building: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_exti.c
+ 
+Building file: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -DUSE_HAL_DRIVER -DSTM32F042x6 -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.d" -MT"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.o" -o "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.o" "../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.c"
+Finished building: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.c
+ 
+Building file: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash_ex.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -DUSE_HAL_DRIVER -DSTM32F042x6 -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash_ex.d" -MT"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash_ex.o" -o "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash_ex.o" "../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash_ex.c"
+Finished building: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash_ex.c
+ 
+Building file: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -DUSE_HAL_DRIVER -DSTM32F042x6 -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.d" -MT"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.o" -o "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.o" "../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c"
+Finished building: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c
+ 
+Building file: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -DUSE_HAL_DRIVER -DSTM32F042x6 -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.d" -MT"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.o" -o "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.o" "../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.c"
+Finished building: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.c
+ 
+Building file: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -DUSE_HAL_DRIVER -DSTM32F042x6 -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.d" -MT"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.o" -o "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.o" "../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c"
+Finished building: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c
+ 
+Building file: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -DUSE_HAL_DRIVER -DSTM32F042x6 -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr.d" -MT"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr.o" -o "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr.o" "../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr.c"
+Finished building: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr.c
+ 
+Building file: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr_ex.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -DUSE_HAL_DRIVER -DSTM32F042x6 -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr_ex.d" -MT"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr_ex.o" -o "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr_ex.o" "../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr_ex.c"
+Finished building: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr_ex.c
+ 
+Building file: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -DUSE_HAL_DRIVER -DSTM32F042x6 -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.d" -MT"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.o" -o "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.o" "../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c"
+Finished building: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c
+ 
+Building file: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -DUSE_HAL_DRIVER -DSTM32F042x6 -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.d" -MT"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.o" -o "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.o" "../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.c"
+Finished building: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.c
+ 
+Building file: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -DUSE_HAL_DRIVER -DSTM32F042x6 -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.d" -MT"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.o" -o "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.o" "../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.c"
+Finished building: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.c
+ 
+Building file: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\blank_f042\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -DUSE_HAL_DRIVER -DSTM32F042x6 -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/blank_f042/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.d" -MT"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.o" -o "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.o" "../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.c"
+Finished building: ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.c
+ 
+Building target: blank_f042.elf
 Invoking: MCU GCC Linker
-arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -T"../STM32L476JGYx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "blinky.elf" @"objects.list"   -lm
-Finished building target: blinky.elf
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -specs=nosys.specs -specs=nano.specs -T"../STM32F042K6Tx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "blank_f042.elf" @"objects.list"   -lm
+Finished building target: blank_f042.elf
  
 make --no-print-directory post-build
 Generating hex and Printing size information:
-arm-none-eabi-objcopy -O ihex "blinky.elf" "blinky.hex"
-arm-none-eabi-size "blinky.elf"
+arm-none-eabi-objcopy -O ihex "blank_f042.elf" "blank_f042.hex"
+arm-none-eabi-size "blank_f042.elf"
    text	   data	    bss	    dec	    hex	filename
-   4360	     32	   1568	   5960	   1748	blinky.elf
+   3104	     20	   1572	   4696	   1258	blank_f042.elf
  
-15:43:43 **** Incremental Build of configuration Debug for project blinky ****
+20:32:30 **** Incremental Build of configuration Debug for project blank_f042 ****
 make all 
 make: Nothing to be done for 'all'.

@@ -2,26 +2,31 @@
 <section name="Workbench">
 	<section name="WorkbenchPreferenceDialogSettings">
 		<item value="427" key="DIALOG_X_ORIGIN"/>
-		<item value="72" key="DIALOG_Y_ORIGIN"/>
+		<item value="25" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="org.eclipse.ui.internal.QuickAccess">
-		<item value="-1" key="dialogHeight"/>
-		<item value="-1" key="dialogWidth"/>
+		<item value="250" key="dialogHeight"/>
+		<item value="350" key="dialogWidth"/>
 		<list key="textEntries">
+			<item value="1"/>
 		</list>
 		<list key="orderedElements">
+			<item value="org.eclipse.cdt.ui.preferences.CodeFormatterPreferencePage"/>
 		</list>
 		<list key="orderedProviders">
+			<item value="org.eclipse.ui.preferences"/>
 		</list>
 		<list key="textArray">
+			<item value="format"/>
 		</list>
 	</section>
 	<section name="NewWizardAction">
 	</section>
 	<section name="ImportExportAction">
-		<item value="org.eclipse.ui.wizards.import.ExternalProject" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
+		<item value="org.eclipse.ui.wizards.import.FileSystem" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
 		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
 			<item value="org.eclipse.ui.Basic"/>
+			<item value="org.eclipse.cdt.ui.importWizardCategory"/>
 		</list>
 	</section>
 	<section name="FileSystemImportWizard">
@@ -32,6 +37,12 @@
 		<item value="true" key="WizardFileSystemResourceImportPage1.STORE_CREATE_LINKS_IN_WORKSPACE_ID"/>
 		<item value="true" key="WizardFileSystemResourceImportPage1.STORE_PATH_VARIABLE_SELECTED_ID"/>
 		<list key="WizardFileSystemResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\en.stsw-stlkt01\v1.2.0\Drivers\STM32L4xx_HAL_Driver\Src"/>
+			<item value="C:\Users\popof\Desktop\School\CMU\Priya Project\SensorTile\en.stsw-stlkt01\v1.2.0\Drivers\BSP\Components\lsm6dsm"/>
+			<item value="C:\Users\popof\Desktop\School\CMU\Priya Project\SensorTile\en.stsw-stlkt01\v1.2.0\Projects\SensorTile\Applications\DataLog\Src"/>
+			<item value="C:\Users\popof\Desktop\School\CMU\Priya Project\SensorTile\en.stsw-stlkt01\v1.2.0\Drivers"/>
+			<item value="C:\Users\popof\Desktop\School\CMU\Priya Project\SensorTile\en.stsw-stlkt01\v1.2.0\Drivers\BSP"/>
+			<item value="C:\Users\popof\Desktop\School\CMU\Priya Project\SensorTile\en.stsw-stlkt01\v1.2.0"/>
 			<item value="C:\Users\popof\Desktop\School\CMU\Priya Project\SensorTile\en.stsw-stlkt01\v1.2.0\Tutorial5"/>
 		</list>
 	</section>

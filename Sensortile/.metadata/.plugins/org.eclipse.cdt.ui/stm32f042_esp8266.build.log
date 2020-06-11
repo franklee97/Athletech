@@ -1,0 +1,6 @@
+18:04:31 **** Incremental Build of configuration Debug for project stm32f042_esp8266 ****
+make all 
+make: Nothing to be done for 'all'.
+
+18:04:31 Build Finished (took 295ms)
+

@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="" key="selection"/>
+		<item value="ESP_Init" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="huart2"/>
+			<item value="usart_isr"/>
+			<item value="usart_sr"/>
+			<item value="adc_init"/>
 			<item value="ADCEx_Oversampling_Ratio"/>
 			<item value="#include"/>
 			<item value="USBD_Device"/>
 			<item value="uart"/>
-			<item value="adc"/>
-			<item value="acd"/>
-			<item value="i2c"/>
-			<item value="gpio_init"/>
 		</list>
 		<list key="replacehistory">
 		</list>

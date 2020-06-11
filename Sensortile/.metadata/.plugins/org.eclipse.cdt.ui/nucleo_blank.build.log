@@ -1,0 +1,6 @@
+16:23:25 **** Incremental Build of configuration Debug for project nucleo_blank ****
+make all 
+make: Nothing to be done for 'all'.
+
+16:23:25 Build Finished (took 259ms)
+

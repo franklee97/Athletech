@@ -118,7 +118,8 @@ int main(void) {
 
     /* Configure the system clock */
     SystemClock_Config();
-
+    __HAL_RCC_GPIOC_CLK_ENABLE()
+        ;
     MX_ADC1_Init();
 
     if (SendOverUSB) {

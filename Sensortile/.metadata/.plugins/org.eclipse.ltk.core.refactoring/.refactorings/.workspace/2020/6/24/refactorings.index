@@ -1,0 +1,6 @@
+1591713851777	Delete resource 'STM32L4xx-SensorTile'
+1591740146092	Delete 3 resources
+1591740242104	Delete resource 'sensortile_virtualcom/Src/usb_device.c'
+1591740254396	Delete resource 'sensortile_virtualcom/Src/usbd_cdc_if.c'
+1591740259178	Delete resource 'sensortile_virtualcom/Inc/usbd_cdc_if.h'
+1591740264495	Delete resource 'sensortile_virtualcom/Inc/usb_device.h'

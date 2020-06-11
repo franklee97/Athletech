@@ -1,0 +1,23 @@
+17:25:30 **** Incremental Build of configuration Debug for project nucleo_esp8266 ****
+make all 
+Building file: ../Src/main.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\nucleo_esp8266\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DUSE_HAL_DRIVER -DSTM32F446xx -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/nucleo_esp8266/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/nucleo_esp8266/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/nucleo_esp8266/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/nucleo_esp8266/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/nucleo_esp8266/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+Finished building: ../Src/main.c
+ 
+Building target: nucleo_esp8266.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -T"../STM32F446RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "nucleo_esp8266.elf" @"objects.list"   -lm
+Finished building target: nucleo_esp8266.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "nucleo_esp8266.elf" "nucleo_esp8266.hex"
+arm-none-eabi-size "nucleo_esp8266.elf"
+   text	   data	    bss	    dec	    hex	filename
+  12252	    136	   2040	  14428	   385c	nucleo_esp8266.elf
+ 
+
+17:25:31 Build Finished (took 1s.690ms)
+

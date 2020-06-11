@@ -1,0 +1,30 @@
+23:33:21 **** Incremental Build of configuration Debug for project st_uart1_test ****
+make all 
+Building file: ../Src/main.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\st_uart1_test\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DUSE_HAL_DRIVER -DSTM32L476xx -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/st_uart1_test/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/st_uart1_test/Drivers/STM32L4xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/st_uart1_test/Drivers/STM32L4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/st_uart1_test/Drivers/CMSIS/Device/ST/STM32L4xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/st_uart1_test/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+../Src/main.c: In function 'main':
+../Src/main.c:101:30: warning: pointer targets in passing argument 2 of 'UU_PutString' differ in signedness [-Wpointer-sign]
+         UU_PutString(USART1, "Penis\r\n");
+                              ^~~~~~~~~~~
+../Src/main.c:56:6: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ void UU_PutString(USART_TypeDef* USARTx, uint8_t * str);
+      ^~~~~~~~~~~~
+Finished building: ../Src/main.c
+ 
+Building target: st_uart1_test.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -T"../STM32L476JGYx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "st_uart1_test.elf" @"objects.list"   -lm
+Finished building target: st_uart1_test.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "st_uart1_test.elf" "st_uart1_test.hex"
+arm-none-eabi-size "st_uart1_test.elf"
+   text	   data	    bss	    dec	    hex	filename
+   8960	     32	   1696	  10688	   29c0	st_uart1_test.elf
+ 
+
+23:33:22 Build Finished (took 1s.600ms)
+

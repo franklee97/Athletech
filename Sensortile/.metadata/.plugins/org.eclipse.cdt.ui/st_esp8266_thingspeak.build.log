@@ -1,0 +1,6 @@
+16:48:15 **** Incremental Build of configuration Debug for project st_esp8266_thingspeak ****
+make all 
+make: Nothing to be done for 'all'.
+
+16:48:15 Build Finished (took 301ms)
+

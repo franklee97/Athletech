@@ -23,7 +23,7 @@
 	<section name="NewWizardAction">
 	</section>
 	<section name="ImportExportAction">
-		<item value="org.eclipse.ui.wizards.import.ExternalProject" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
+		<item value="org.eclipse.ui.wizards.import.FileSystem" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
 		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
 			<item value="org.eclipse.ui.Basic"/>
 			<item value="org.eclipse.cdt.ui.importWizardCategory"/>
@@ -37,6 +37,8 @@
 		<item value="true" key="WizardFileSystemResourceImportPage1.STORE_CREATE_LINKS_IN_WORKSPACE_ID"/>
 		<item value="true" key="WizardFileSystemResourceImportPage1.STORE_PATH_VARIABLE_SELECTED_ID"/>
 		<list key="WizardFileSystemResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Firebase_Library\src"/>
+			<item value="C:\Users\popof\Desktop\School\CMU\Priya Project\Code\ESP8266WiFi_Library\src"/>
 			<item value="C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\en.stsw-stlkt01\v1.2.0\Drivers\STM32L4xx_HAL_Driver\Src"/>
 			<item value="C:\Users\popof\Desktop\School\CMU\Priya Project\SensorTile\en.stsw-stlkt01\v1.2.0\Drivers\BSP\Components\lsm6dsm"/>
 			<item value="C:\Users\popof\Desktop\School\CMU\Priya Project\SensorTile\en.stsw-stlkt01\v1.2.0\Projects\SensorTile\Applications\DataLog\Src"/>

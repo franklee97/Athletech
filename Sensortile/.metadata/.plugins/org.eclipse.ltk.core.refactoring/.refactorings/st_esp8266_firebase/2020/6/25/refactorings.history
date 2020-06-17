@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;st_esp8266_firebase/st_esp8266_test.ioc&apos; to &apos;st_esp8266_firebase.ioc&apos;" description="Rename resource &apos;st_esp8266_test.ioc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="st_esp8266_test.ioc" name="st_esp8266_firebase.ioc" stamp="1592343153936" updateReferences="true"/>
+</session>

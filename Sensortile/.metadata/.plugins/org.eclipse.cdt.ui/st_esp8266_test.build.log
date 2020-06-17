@@ -1,6 +1,6 @@
-16:56:30 **** Incremental Build of configuration Debug for project st_esp8266_test ****
+17:48:15 **** Build of configuration Debug for project st_esp8266_test ****
 make all 
 make: Nothing to be done for 'all'.
 
-16:56:31 Build Finished (took 375ms)
+17:48:16 Build Finished (took 364ms)
 

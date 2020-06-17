@@ -1,6 +1,6 @@
-16:41:19 **** Incremental Build of configuration Debug for project stm32f446_thingspeak_test ****
+17:08:37 **** Incremental Build of configuration Debug for project stm32f446_thingspeak_test ****
 make all 
 make: Nothing to be done for 'all'.
 
-16:41:19 Build Finished (took 303ms)
+17:08:37 Build Finished (took 379ms)
 

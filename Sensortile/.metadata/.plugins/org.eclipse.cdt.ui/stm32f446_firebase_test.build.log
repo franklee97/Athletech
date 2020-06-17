@@ -1,0 +1,6 @@
+15:58:34 **** Incremental Build of configuration Debug for project stm32f446_firebase_test ****
+make all 
+make: Nothing to be done for 'all'.
+
+15:58:34 Build Finished (took 308ms)
+

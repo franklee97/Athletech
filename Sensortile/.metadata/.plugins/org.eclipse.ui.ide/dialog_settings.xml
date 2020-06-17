@@ -9,9 +9,10 @@
 	</section>
 	<section name="ExternalProjectImportWizard">
 		<item value="false" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
-		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
+		<item value="true" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Users\popof\Downloads\ESP_DATA_LOGGER_TS"/>
 			<item value="C:\Users\popof\Desktop\School\CMU\Priya Project\SensorTile"/>
 			<item value="C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile"/>
 			<item value="C:\Users\popof\Desktop\School\CMU\Priya Project\SensorTile\en.stsw-stlkt01"/>

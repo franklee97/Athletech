@@ -1,7 +1,7 @@
 [PreviousGenFiles]
-HeaderPath=C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/st_esp8266_thingspeak/Inc
+HeaderPath=C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/st_esp8266_firebase_ADC/Inc
 HeaderFiles=stm32l4xx_it.h;stm32l4xx_hal_conf.h;main.h;
-SourcePath=C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/st_esp8266_thingspeak/Src
+SourcePath=C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/st_esp8266_firebase_ADC/Src
 SourceFiles=stm32l4xx_it.c;stm32l4xx_hal_msp.c;main.c;
 
 [PreviousLibFiles]

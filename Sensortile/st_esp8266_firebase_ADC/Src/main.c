@@ -21,6 +21,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "ESPDataLogger.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -43,6 +44,7 @@
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
 
+UART_HandleTypeDef huart5;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
@@ -54,20 +56,14 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_USART1_UART_Init(void);
+static void MX_UART5_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint16_t ADC_Get_Value(void) {
-    uint16_t val = 0;
-    HAL_ADC_Start(&hadc1);
-    HAL_ADC_PollForConversion(&hadc1, 100);
-    val = HAL_ADC_GetValue(&hadc1);
-    HAL_ADC_Stop(&hadc1);
-    return val;
-}
+uint16_t ADC_Get_Value(void);
 
 float Voltage = 0;
 uint16_t ADC_Value = 0;
@@ -106,6 +102,7 @@ int main(void) {
     MX_GPIO_Init();
     MX_ADC1_Init();
     MX_USART1_UART_Init();
+    MX_UART5_Init();
     /* USER CODE BEGIN 2 */
     ESP_Init("test", "12345678");
     /* USER CODE END 2 */
@@ -124,7 +121,7 @@ int main(void) {
         Value_Buf[2] = count;
         Value_Buf[3] = count * 2;
 
-        ESP_Send_Multi("KMFX6NJEQ3JRXF6M", 4, Value_Buf);
+        ESP_Send_Multi(Value_Buf);
 
 //        HAL_Delay(15000);
     }
@@ -169,8 +166,9 @@ void SystemClock_Config(void) {
         Error_Handler();
     }
     PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART1
-            | RCC_PERIPHCLK_ADC;
+            | RCC_PERIPHCLK_UART5 | RCC_PERIPHCLK_ADC;
     PeriphClkInit.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK2;
+    PeriphClkInit.Uart5ClockSelection = RCC_UART5CLKSOURCE_PCLK1;
     PeriphClkInit.AdcClockSelection = RCC_ADCCLKSOURCE_PLLSAI1;
     PeriphClkInit.PLLSAI1.PLLSAI1Source = RCC_PLLSOURCE_MSI;
     PeriphClkInit.PLLSAI1.PLLSAI1M = 1;
@@ -252,6 +250,39 @@ static void MX_ADC1_Init(void) {
 }
 
 /**
+ * @brief UART5 Initialization Function
+ * @param None
+ * @retval None
+ */
+static void MX_UART5_Init(void) {
+
+    /* USER CODE BEGIN UART5_Init 0 */
+
+    /* USER CODE END UART5_Init 0 */
+
+    /* USER CODE BEGIN UART5_Init 1 */
+
+    /* USER CODE END UART5_Init 1 */
+    huart5.Instance = UART5;
+    huart5.Init.BaudRate = 115200;
+    huart5.Init.WordLength = UART_WORDLENGTH_8B;
+    huart5.Init.StopBits = UART_STOPBITS_1;
+    huart5.Init.Parity = UART_PARITY_NONE;
+    huart5.Init.Mode = UART_MODE_TX_RX;
+    huart5.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+    huart5.Init.OverSampling = UART_OVERSAMPLING_16;
+    huart5.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+    huart5.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+    if (HAL_UART_Init(&huart5) != HAL_OK) {
+        Error_Handler();
+    }
+    /* USER CODE BEGIN UART5_Init 2 */
+
+    /* USER CODE END UART5_Init 2 */
+
+}
+
+/**
  * @brief USART1 Initialization Function
  * @param None
  * @retval None
@@ -292,18 +323,27 @@ static void MX_USART1_UART_Init(void) {
 static void MX_GPIO_Init(void) {
 
     /* GPIO Ports Clock Enable */
+    __HAL_RCC_GPIOD_CLK_ENABLE()
+    ;
     __HAL_RCC_GPIOG_CLK_ENABLE()
     ;
     HAL_PWREx_EnableVddIO2();
-    __HAL_RCC_GPIOH_CLK_ENABLE()
-    ;
     __HAL_RCC_GPIOC_CLK_ENABLE()
+    ;
+    __HAL_RCC_GPIOH_CLK_ENABLE()
     ;
 
 }
 
 /* USER CODE BEGIN 4 */
-
+uint16_t ADC_Get_Value(void) {
+    uint16_t val = 0;
+    HAL_ADC_Start(&hadc1);
+    HAL_ADC_PollForConversion(&hadc1, 100);
+    val = HAL_ADC_GetValue(&hadc1);
+    HAL_ADC_Stop(&hadc1);
+    return val;
+}
 /* USER CODE END 4 */
 
 /**

@@ -30,8 +30,14 @@ int Uart_read(void);
 /* writes the data to the tx_buffer and increment the head count in tx_buffer */
 void Uart_write(int c);
 
+/* writes the data to the tx_debug_buffer and increment the head count in tx_debug_buffer */
+void Uart_debug_write(int c);
+
 /* function to send the string to the uart */
 void Uart_sendstring(const char *s);
+
+/* function to send the string to the debug uart */
+void Uart_debug_sendstring(const char *s);
 
 /* Print a number with any base
  * base can be 10, 8 etc*/
@@ -81,6 +87,9 @@ int Wait_for (char *string);
 
 /* the ISR for the uart. put it in the IRQ handler */
 void Uart_isr (UART_HandleTypeDef *huart);
+
+/* the ISR for the uart_debug. put it in the IRQ handler */
+void Uart_debug_isr (UART_HandleTypeDef *huart);
 
 
 

@@ -22,6 +22,7 @@ void ESP_Init(char *SSID, char *PASSWD) {
     Ringbuf_init();
 
     Uart_sendstring("AT+RST\r\n");
+    Uart_debug_sendstring("Resetting...\r\n");
     HAL_Delay(1000);
 
     Uart_flush();
@@ -61,38 +62,7 @@ void ESP_Init(char *SSID, char *PASSWD) {
 
 }
 
-void ESP_Send_Data(char *APIkey, int Field_num, uint16_t value) {
-    char local_buf[100] = { 0 };
-    char local_buf2[30] = { 0 };
-
-    Uart_sendstring("AT+CIPSTART=\"TCP\",\"184.106.153.149\",80\r\n");
-    while (!(Wait_for("OK\r\n")))
-        ;
-
-    sprintf(local_buf, "GET /update?api_key=%s&field%d=%u\r\n", APIkey,
-            Field_num, value);
-    int len = strlen(local_buf);
-
-    sprintf(local_buf2, "AT+CIPSEND=%d\r\n", len);
-    Uart_sendstring(local_buf2);
-    while (!(Wait_for(">")))
-        ;
-
-    Uart_sendstring(local_buf);
-    while (!(Wait_for("SEND OK\r\n")))
-        ;
-
-    while (!(Wait_for("CLOSED")))
-        ;
-
-    bufclr(local_buf);
-    bufclr(local_buf2);
-
-    Ringbuf_init();
-
-}
-
-void ESP_Send_Multi(char *APIkey, int numberoffileds, uint16_t value[]) {
+void ESP_Send_Multi(uint16_t value[]) {
     char local_buf[500] = { 0 };
     char local_buf2[30] = { 0 };
     char field_buf[200] = { 0 };

@@ -1,0 +1,38 @@
+13:23:05 **** Incremental Build of configuration Debug for project st_virtualcom ****
+make all 
+Building file: ../Src/usbd_cdc_if.c
+Invoking: MCU GCC Compiler
+C:\Users\popof\Desktop\School\CMU\Priya Project\Code\Sensortile\st_virtualcom\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DUSE_HAL_DRIVER -DSTM32L476xx -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/st_virtualcom/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/st_virtualcom/Drivers/STM32L4xx_HAL_Driver/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/st_virtualcom/Drivers/STM32L4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/st_virtualcom/Middlewares/ST/STM32_USB_Device_Library/Core/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/st_virtualcom/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/st_virtualcom/Drivers/CMSIS/Device/ST/STM32L4xx/Include" -I"C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/st_virtualcom/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/usbd_cdc_if.d" -MT"Src/usbd_cdc_if.o" -o "Src/usbd_cdc_if.o" "../Src/usbd_cdc_if.c"
+../Src/usbd_cdc_if.c: In function 'CDC_Receive_FS':
+../Src/usbd_cdc_if.c:260:25: warning: pointer targets in passing argument 1 of 'CDC_Transmit_FS' differ in signedness [-Wpointer-sign]
+         CDC_Transmit_FS(data, strlen(data));
+                         ^~~~
+In file included from ../Src/usbd_cdc_if.c:23:0:
+C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/st_virtualcom/Inc/usbd_cdc_if.h:106:9: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ uint8_t CDC_Transmit_FS(uint8_t* Buf, uint16_t Len);
+         ^~~~~~~~~~~~~~~
+../Src/usbd_cdc_if.c:264:25: warning: pointer targets in passing argument 1 of 'CDC_Transmit_FS' differ in signedness [-Wpointer-sign]
+         CDC_Transmit_FS(data, strlen(data));
+                         ^~~~
+In file included from ../Src/usbd_cdc_if.c:23:0:
+C:/Users/popof/Desktop/School/CMU/Priya Project/Code/Sensortile/st_virtualcom/Inc/usbd_cdc_if.h:106:9: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ uint8_t CDC_Transmit_FS(uint8_t* Buf, uint16_t Len);
+         ^~~~~~~~~~~~~~~
+Finished building: ../Src/usbd_cdc_if.c
+ 
+Building target: st_virtualcom.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -T"../STM32L476JGYx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "st_virtualcom.elf" @"objects.list"   -lm
+Finished building target: st_virtualcom.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "st_virtualcom.elf" "st_virtualcom.hex"
+arm-none-eabi-size "st_virtualcom.elf"
+   text	   data	    bss	    dec	    hex	filename
+  16568	    416	   8464	  25448	   6368	st_virtualcom.elf
+ 
+
+13:23:07 Build Finished (took 1s.853ms)
+

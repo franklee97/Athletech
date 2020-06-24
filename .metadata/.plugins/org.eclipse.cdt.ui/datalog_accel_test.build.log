@@ -1,6 +1,6 @@
-17:22:35 **** Incremental Build of configuration Debug for project datalog_accel_test ****
+18:39:48 **** Incremental Build of configuration Debug for project datalog_accel_test ****
 make all 
 make: Nothing to be done for 'all'.
 
-17:22:36 Build Finished (took 439ms)
+18:39:49 Build Finished (took 430ms)
 

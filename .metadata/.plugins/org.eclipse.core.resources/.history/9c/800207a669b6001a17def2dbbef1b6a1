@@ -1,0 +1,63 @@
+#include "spi_helper.h"
+
+/**
+ * @brief  Writes a buffer to the sensor
+ * @param  handle instance handle
+ * @param  WriteAddr specifies the internal sensor address register to be written to
+ * @param  pBuffer pointer to data buffer
+ * @param  nBytesToWrite number of bytes to be written
+ * @retval 0 in case of success
+ * @retval 1 in case of failure
+ */
+uint8_t Sensor_IO_Write(void *handle, uint8_t WriteAddr, uint8_t *pBuffer,
+		uint16_t nBytesToWrite) {
+	return Sensor_IO_SPI_Write(handle, WriteAddr, pBuffer, nBytesToWrite);
+}
+
+/**
+ * @brief  Writes a buffer to the sensor
+ * @param  handle instance handle
+ * @param  WriteAddr specifies the internal sensor address register to be written to
+ * @param  pBuffer pointer to data buffer
+ * @param  nBytesToWrite number of bytes to be written
+ * @retval 0 in case of success
+ * @retval 1 in case of failure
+ */
+uint8_t Sensor_IO_SPI_Write(void *handle, uint8_t WriteAddr, uint8_t *pBuffer,
+		uint16_t nBytesToWrite) {
+	uint8_t i;
+
+// Select the correct device
+	Sensor_IO_SPI_CS_Enable(handle);
+
+	SPI_Write(&SPI_Sensor_Handle, WriteAddr);
+
+	for (i = 0; i < nBytesToWrite; i++) {
+		SPI_Write(&SPI_Sensor_Handle, pBuffer[i]);
+	}
+// Deselect the device
+	Sensor_IO_SPI_CS_Disable(handle);
+
+	return COMPONENT_OK;
+}
+
+/**
+ * @brief  This function writes a single byte on SPI 3-wire.
+ * @param  xSpiHandle: SPI Handler.
+ * @param  val: value.
+ * @retval None
+ */
+void SPI_Write(SPI_HandleTypeDef* xSpiHandle, uint8_t val) {
+	/* check TXE flag */
+	while ((xSpiHandle->Instance->SR & SPI_FLAG_TXE) != SPI_FLAG_TXE)
+		;
+
+	/* Write the data */
+	*((__IO uint8_t*) &xSpiHandle->Instance->DR) = val;
+
+	/* Wait BSY flag */
+	while ((xSpiHandle->Instance->SR & SPI_FLAG_FTLVL) != SPI_FTLVL_EMPTY)
+		;
+	while ((xSpiHandle->Instance->SR & SPI_FLAG_BSY) == SPI_FLAG_BSY)
+		;
+}

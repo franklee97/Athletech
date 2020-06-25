@@ -77,14 +77,14 @@ void ESP_Init(char *SSID, char *PASSWD, char *Server_IP) {
 
 }
 
-void ESP_Send_Multi(uint16_t value[]) {
+void ESP_Send_Multi(int value[]) {
 	char data[80];
 
 	char local_buf[500] = { 0 };        // AT+CIPSEND=n
-	char field_buf[200] = { 0 };        // Actual data
+	char field_buf[500] = { 0 };        // Actual data
 
-	sprintf(field_buf, "EMG:%u,FSR:%u,IMU:%u,TS:%u", value[0], value[1],
-			value[2], value[3]);
+	sprintf(field_buf, "EMG:%d,FSR:%d,IMU-X:%d,IMU-Y:%d, IMU-Z:%d", value[0], value[1],
+			value[2], value[3], value[4]);
 	int len = strlen(field_buf);
 
 	sprintf(local_buf, "AT+CIPSEND=%d\r\n", len);
@@ -98,8 +98,8 @@ void ESP_Send_Multi(uint16_t value[]) {
 
 //	sprintf(data, "Sent the following data: EMG:%u,FSR:%u,IMU:%u,TS:%u\r\n",
 //			value[0], value[1], value[2], value[3]);
-	sprintf(data, "%u\r\n", value[0]);
-	Uart_debug_sendstring(data);
+	//sprintf(data, "%u\r\n", value[0]);
+	//Uart_debug_sendstring(data);
 
 	bufclr(field_buf);
 	bufclr(local_buf);

@@ -88,6 +88,14 @@ typedef enum {
 	LSM303AGR_X_0 /* . */
 } ACCELERO_ID_t;
 
+
+typedef enum
+{
+  GYRO_SENSORS_AUTO = -1,        /* Always first element and equal to -1 */
+  LSM6DSM_G_0,                   /* Default on board. */
+} GYRO_ID_t;
+
+
 typedef enum {
 //  TEMPERATURE_SENSORS_AUTO = -1, /* Always first element and equal to -1 */
 	LSM6DSM = 0, /* LSM6DSM. */
@@ -105,6 +113,14 @@ SensorAxes_t Accelero_Sensor_Handler(void *handle);
 DrvStatusTypeDef BSP_ACCELERO_Get_Instance(void *handle, uint8_t *instance);
 DrvStatusTypeDef BSP_ACCELERO_IsInitialized(void *handle, uint8_t *status);
 DrvStatusTypeDef BSP_ACCELERO_Get_Axes(void *handle, SensorAxes_t *acceleration);
+
+DrvStatusTypeDef BSP_GYRO_Init( GYRO_ID_t id, void **handle );
+DrvStatusTypeDef BSP_LSM6DSM_GYRO_Init( void **handle );
+DrvStatusTypeDef BSP_GYRO_Sensor_Enable( void *handle );
+SensorAxes_t Gyro_Sensor_Handler( void *handle );
+DrvStatusTypeDef BSP_GYRO_IsInitialized( void *handle, uint8_t *status );
+DrvStatusTypeDef BSP_GYRO_Get_Instance( void *handle, uint8_t *instance );
+DrvStatusTypeDef BSP_GYRO_Get_Axes( void *handle, SensorAxes_t *angular_velocity );
 
 uint8_t Sensor_IO_SPI_CS_Init(void *handle);
 DrvStatusTypeDef Sensor_IO_SPI_Init(void);

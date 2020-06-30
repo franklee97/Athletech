@@ -58,6 +58,12 @@ static DrvContextTypeDef ACCELERO_SensorHandle[2];
 static ACCELERO_Data_t ACCELERO_Data[2]; // Accelerometer - all.
 static void *LSM6DSM_X_0_handle = NULL;
 static LSM6DSM_X_Data_t LSM6DSM_X_0_Data; // Accelerometer - sensor 0.
+
+static DrvContextTypeDef GYRO_SensorHandle[ 1 ];
+static GYRO_Data_t GYRO_Data[ 1 ]; // Gyroscope - all.
+static LSM6DSM_G_Data_t LSM6DSM_G_0_Data; // Gyroscope - sensor 0.
+static void *LSM6DSM_G_0_handle = NULL;
+
 /* USER CODE END PV */
 
 
@@ -80,8 +86,8 @@ float Voltage = 0;
 uint16_t ADC_Value = 0;
 uint8_t count = 0;
 
-int Value_Buf[5];
-
+int Value_Buf[8];
+int t1;
 /* USER CODE END 0 */
 
 /**
@@ -124,20 +130,33 @@ int main(void)
   		while (1)
   			;
   	}
+
+    if (BSP_GYRO_Init( LSM6DSM_G_0, &LSM6DSM_G_0_handle ) != COMPONENT_OK)
+    {
+      while(1);
+    }
+
+
   	// Enable sensor
   	BSP_ACCELERO_Sensor_Enable(LSM6DSM_X_0_handle);
+    BSP_GYRO_Sensor_Enable( LSM6DSM_G_0_handle );
+
 	ESP_Init("FiOS-1NOZN", "6905straw8943hoot", "192.168.1.229");
 
 	SensorAxes_t accel;
+	SensorAxes_t gyro;
+	int t2;
+	char time[100];
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 	while (1) {
     /* USER CODE END WHILE */
-
+		t1 = HAL_GetTick();
     /* USER CODE BEGIN 3 */
 		accel = Accelero_Sensor_Handler(LSM6DSM_X_0_handle);
+		gyro = Gyro_Sensor_Handler(LSM6DSM_G_0_handle);
 		ADC_Value = ADC_Get_Value();
 		Voltage = ((float) ADC_Value * 3.3 / 4095);
 		count++;
@@ -146,7 +165,16 @@ int main(void)
 		Value_Buf[2] = (int)accel.AXIS_X;
 		Value_Buf[3] = (int)accel.AXIS_Y;
  		Value_Buf[4] = (int)accel.AXIS_Z;
+ 		Value_Buf[5] = (int)gyro.AXIS_X;
+ 		Value_Buf[6] = (int)gyro.AXIS_Y;
+ 		Value_Buf[7] = (int)gyro.AXIS_Z;
 		ESP_Send_Multi(Value_Buf);
+		HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_12);
+
+		t2 = HAL_GetTick() - t1;
+		sprintf(time, "%d\r\n", t2);
+		Uart_debug_sendstring(time);
+
 
 //        HAL_Delay(15000);
 	}
@@ -478,6 +506,33 @@ DrvStatusTypeDef BSP_ACCELERO_Init(ACCELERO_ID_t id, void **handle) {
 	return COMPONENT_OK;
 }
 
+/**
+ * @brief Initialize a gyroscope sensor
+ * @param id the gyroscope sensor identifier
+ * @param handle the device handle
+ * @retval COMPONENT_OK in case of success
+ * @retval COMPONENT_ERROR in case of failure
+ */
+DrvStatusTypeDef BSP_GYRO_Init( GYRO_ID_t id, void **handle )
+{
+
+  *handle = NULL;
+
+  switch((int)id)
+  {
+    case LSM6DSM_G_0:
+    {
+      if( BSP_LSM6DSM_GYRO_Init(handle) == COMPONENT_ERROR )
+      {
+        return COMPONENT_ERROR;
+      }
+      break;
+    }
+  }
+
+  return COMPONENT_OK;
+}
+
 DrvStatusTypeDef BSP_LSM6DSM_ACCELERO_Init(void **handle) {
 	ACCELERO_Drv_t *driver = NULL;
 	uint8_t data = 0x0C;
@@ -545,6 +600,79 @@ DrvStatusTypeDef BSP_LSM6DSM_ACCELERO_Init(void **handle) {
 //	LSM6DSM_Sensor_IO_ITConfig();
 	return COMPONENT_OK;
 }
+
+DrvStatusTypeDef BSP_LSM6DSM_GYRO_Init( void **handle )
+{
+  GYRO_Drv_t *driver = NULL;
+  uint8_t data = 0x0C;
+
+  if(GYRO_SensorHandle[ LSM6DSM_G_0 ].isInitialized == 1)
+  {
+    /* We have reached the max num of instance for this component */
+    return COMPONENT_ERROR;
+  }
+
+  if ( Sensor_IO_SPI_Init() == COMPONENT_ERROR )
+  {
+    return COMPONENT_ERROR;
+  }
+
+  /* Setup sensor handle. */
+  /* Gyroscope - sensor 0 */
+  GYRO_SensorHandle[ LSM6DSM_G_0 ].who_am_i      = LSM6DSM_ACC_GYRO_WHO_AM_I;
+  GYRO_SensorHandle[ LSM6DSM_G_0 ].ifType        = 1; // SPI interface
+  GYRO_SensorHandle[ LSM6DSM_G_0 ].address       = LSM6DSM_ACC_GYRO_I2C_ADDRESS_HIGH;
+  GYRO_SensorHandle[ LSM6DSM_G_0 ].spiDevice     = LSM6DSM;
+  GYRO_SensorHandle[ LSM6DSM_G_0 ].instance      = LSM6DSM_G_0;
+  GYRO_SensorHandle[ LSM6DSM_G_0 ].isInitialized = 0;
+  GYRO_SensorHandle[ LSM6DSM_G_0 ].isEnabled     = 0;
+  GYRO_SensorHandle[ LSM6DSM_G_0 ].isCombo       = 1;
+  GYRO_SensorHandle[ LSM6DSM_G_0 ].pData         = ( void * )&GYRO_Data[ LSM6DSM_G_0 ];
+  GYRO_SensorHandle[ LSM6DSM_G_0 ].pVTable       = ( void * )&LSM6DSM_G_Drv;
+  GYRO_SensorHandle[ LSM6DSM_G_0 ].pExtVTable    = 0;
+
+  LSM6DSM_G_0_Data.comboData = &LSM6DSM_Combo_Data[0];
+  GYRO_Data[ LSM6DSM_G_0 ].pComponentData = ( void * )&LSM6DSM_G_0_Data;
+  GYRO_Data[ LSM6DSM_G_0 ].pExtData       = 0;
+
+  *handle = (void *)&GYRO_SensorHandle[ LSM6DSM_G_0 ];
+
+  Sensor_IO_SPI_CS_Init(*handle);
+
+  if(LSM6DSM_Combo_Data[0].isAccInitialized == 0)
+  {
+    // SPI Serial Interface Mode selection --> 3Wires
+    if( Sensor_IO_Write(*handle, LSM6DSM_ACC_GYRO_CTRL3_C, &data, 1) )
+    {
+      return COMPONENT_ERROR;
+    }
+  }
+
+  driver = ( GYRO_Drv_t * )((DrvContextTypeDef *)(*handle))->pVTable;
+
+  if ( driver->Init == NULL )
+  {
+    memset((*handle), 0, sizeof(DrvContextTypeDef));
+    *handle = NULL;
+    return COMPONENT_ERROR;
+  }
+
+  if ( driver->Init( (DrvContextTypeDef *)(*handle) ) == COMPONENT_ERROR )
+  {
+    memset((*handle), 0, sizeof(DrvContextTypeDef));
+    *handle = NULL;
+    return COMPONENT_ERROR;
+  }
+
+  /* Disable I2C interface */
+  if ( LSM6DSM_ACC_GYRO_W_I2C_DISABLE( *handle, LSM6DSM_ACC_GYRO_I2C_DISABLE_SPI_ONLY ) == MEMS_ERROR )
+  {
+    return COMPONENT_ERROR;
+  }
+
+  return COMPONENT_OK;
+}
+
 
 uint8_t Sensor_IO_SPI_CS_Enable(void *handle) {
 	DrvContextTypeDef *ctx = (DrvContextTypeDef *) handle;
@@ -621,6 +749,40 @@ DrvStatusTypeDef BSP_ACCELERO_Sensor_Enable(void *handle) {
 	return COMPONENT_OK;
 }
 
+
+/**
+ * @brief Enable gyroscope sensor
+ * @param handle the device handle
+ * @retval COMPONENT_OK in case of success
+ * @retval COMPONENT_ERROR in case of failure
+ */
+DrvStatusTypeDef BSP_GYRO_Sensor_Enable( void *handle )
+{
+
+  DrvContextTypeDef *ctx = (DrvContextTypeDef *)handle;
+  GYRO_Drv_t *driver = NULL;
+
+  if(ctx == NULL)
+  {
+    return COMPONENT_ERROR;
+  }
+
+  driver = ( GYRO_Drv_t * )ctx->pVTable;
+
+  if ( driver->Sensor_Enable == NULL )
+  {
+    return COMPONENT_ERROR;
+  }
+
+  if ( driver->Sensor_Enable( ctx ) == COMPONENT_ERROR )
+  {
+    return COMPONENT_ERROR;
+  }
+
+  return COMPONENT_OK;
+}
+
+
 /**
  * @brief  Handles the accelerometer axes data getting/sending
  * @param  handle the device handle
@@ -646,12 +808,48 @@ SensorAxes_t Accelero_Sensor_Handler(void *handle) {
 			acceleration.AXIS_Y = 0;
 			acceleration.AXIS_Z = 0;
 		}
-		sprintf(dataOut, "%d, %d, %d\r\n", (int) acceleration.AXIS_X,
+		sprintf(dataOut, "accel: %d, %d, %d\r\n", (int) acceleration.AXIS_X,
 				(int) acceleration.AXIS_Y, (int) acceleration.AXIS_Z);
 		CDC_Transmit_FS((uint8_t*) dataOut, strlen(dataOut));
 	}
 	return acceleration;
 }
+
+/**
+* @brief  Handles the gyroscope axes data getting/sending
+* @param  handle the device handle
+* @retval None
+*/
+SensorAxes_t Gyro_Sensor_Handler( void *handle )
+{
+  char dataOut[256];
+  //uint8_t who_am_i;
+  //float odr;
+  //float fullScale;
+  uint8_t id;
+  SensorAxes_t angular_velocity;
+  uint8_t status;
+  //int32_t d1, d2;
+
+  BSP_GYRO_Get_Instance( handle, &id );
+
+  BSP_GYRO_IsInitialized( handle, &status );
+
+  if ( status == 1 )
+  {
+    if ( BSP_GYRO_Get_Axes( handle, &angular_velocity ) == COMPONENT_ERROR )
+    {
+      angular_velocity.AXIS_X = 0;
+      angular_velocity.AXIS_Y = 0;
+      angular_velocity.AXIS_Z = 0;
+    }
+    sprintf(dataOut, "gyro: %d, %d, %d\r\n", (int) angular_velocity.AXIS_X,
+    				(int) angular_velocity.AXIS_Y, (int) angular_velocity.AXIS_Z);
+    		CDC_Transmit_FS((uint8_t*) dataOut, strlen(dataOut));
+  }
+  return angular_velocity;
+}
+
 
 /**
  * @brief Get the accelerometer sensor instance
@@ -677,6 +875,32 @@ DrvStatusTypeDef BSP_ACCELERO_Get_Instance(void *handle, uint8_t *instance) {
 }
 
 /**
+ * @brief Get the gyroscope sensor instance
+ * @param handle the device handle
+ * @param instance the pointer to the device instance
+ * @retval COMPONENT_OK in case of success
+ * @retval COMPONENT_ERROR in case of failure
+ */
+DrvStatusTypeDef BSP_GYRO_Get_Instance( void *handle, uint8_t *instance )
+{
+  DrvContextTypeDef *ctx = (DrvContextTypeDef *)handle;
+
+  if(ctx == NULL)
+  {
+    return COMPONENT_ERROR;
+  }
+
+  if ( instance == NULL )
+  {
+    return COMPONENT_ERROR;
+  }
+
+  *instance = ctx->instance;
+
+  return COMPONENT_OK;
+}
+
+/**
  * @brief Check if the accelerometer sensor is initialized
  * @param handle the device handle
  * @param status the pointer to the initialization status
@@ -697,6 +921,32 @@ DrvStatusTypeDef BSP_ACCELERO_IsInitialized(void *handle, uint8_t *status) {
 	*status = ctx->isInitialized;
 
 	return COMPONENT_OK;
+}
+
+/**
+ * @brief Check if the gyroscope sensor is initialized
+ * @param handle the device handle
+ * @param status the pointer to the initialization status
+ * @retval COMPONENT_OK in case of success
+ * @retval COMPONENT_ERROR in case of failure
+ */
+DrvStatusTypeDef BSP_GYRO_IsInitialized( void *handle, uint8_t *status )
+{
+  DrvContextTypeDef *ctx = (DrvContextTypeDef *)handle;
+
+  if(ctx == NULL)
+  {
+    return COMPONENT_ERROR;
+  }
+
+  if ( status == NULL )
+  {
+    return COMPONENT_ERROR;
+  }
+
+  *status = ctx->isInitialized;
+
+  return COMPONENT_OK;
 }
 
 /**
@@ -731,6 +981,43 @@ DrvStatusTypeDef BSP_ACCELERO_Get_Axes(void *handle, SensorAxes_t *acceleration)
 
 	return COMPONENT_OK;
 }
+
+/**
+ * @brief Get the gyroscope sensor axes
+ * @param handle the device handle
+ * @param angular_velocity pointer where the values of the axes are written [mdps]
+ * @retval COMPONENT_OK in case of success
+ * @retval COMPONENT_ERROR in case of failure
+ */
+DrvStatusTypeDef BSP_GYRO_Get_Axes( void *handle, SensorAxes_t *angular_velocity )
+{
+
+  DrvContextTypeDef *ctx = (DrvContextTypeDef *)handle;
+  GYRO_Drv_t *driver = NULL;
+
+  if(ctx == NULL)
+  {
+    return COMPONENT_ERROR;
+  }
+
+  driver = ( GYRO_Drv_t * )ctx->pVTable;
+
+  if ( angular_velocity == NULL )
+  {
+    return COMPONENT_ERROR;
+  }
+  if ( driver->Get_Axes == NULL )
+  {
+    return COMPONENT_ERROR;
+  }
+  if ( driver->Get_Axes( ctx, angular_velocity ) == COMPONENT_ERROR )
+  {
+    return COMPONENT_ERROR;
+  }
+
+  return COMPONENT_OK;
+}
+
 
 /**
  * @brief  Configures sensor SPI interface.

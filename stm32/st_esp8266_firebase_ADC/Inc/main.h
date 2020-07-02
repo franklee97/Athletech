@@ -34,6 +34,9 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #include "accelerometer.h"
 #include "gyroscope.h"
+#include "magnetometer.h"
+#include "LSM303AGR_MAG_driver_HL.h"
+#include "LSM303AGR_MAG_driver.h"
 #include "LSM6DSM_ACC_GYRO_driver_HL.h"
 #include "LSM6DSM_ACC_GYRO_driver.h"
 #include "spi_helper.h"
@@ -69,10 +72,19 @@ void Error_Handler(void);
 /* USER CODE BEGIN Private defines */
 #define LSM6DSM_ACC_GYRO_WHO_AM_I         0x6A
 #define LSM6DSM_ACC_GYRO_I2C_ADDRESS_HIGH  0xD6  // SAD[0] = 1
+
+#define LSM303AGR_MAG_WHO_AM_I         0x40
+
+
 #define SENSORTILE_LSM6DSM_SPI_CS_Port	          GPIOB
 #define SENSORTILE_LSM6DSM_SPI_CS_Pin     	  GPIO_PIN_12
 #define SENSORTILE_LSM6DSM_SPI_CS_GPIO_CLK_ENABLE()  __GPIOB_CLK_ENABLE()
+
 #define SENSORTILE_SENSORS_SPI                    SPI2
+
+#define SENSORTILE_LSM303AGR_M_SPI_CS_Port	  GPIOB
+#define SENSORTILE_LSM303AGR_M_SPI_CS_Pin     	  GPIO_PIN_1
+#define SENSORTILE_LSM303AGR_M_SPI_CS_GPIO_CLK_ENABLE()  __GPIOB_CLK_ENABLE()
 
 #define SENSORTILE_SENSORS_SPI_Port               GPIOB
 #define SENSORTILE_SENSORS_SPI_MOSI_Pin           GPIO_PIN_15
@@ -92,6 +104,13 @@ typedef enum {
 	GYRO_SENSORS_AUTO = -1, /* Always first element and equal to -1 */
 	LSM6DSM_G_0, /* Default on board. */
 } GYRO_ID_t;
+
+typedef enum
+{
+  MAGNETO_SENSORS_AUTO = -1,     /* Always first element and equal to -1 */
+  LSM303AGR_M_0                      /* Default on board. */
+} MAGNETO_ID_t;
+
 
 typedef enum {
 //  TEMPERATURE_SENSORS_AUTO = -1, /* Always first element and equal to -1 */
@@ -118,6 +137,17 @@ SensorAxes_t Gyro_Sensor_Handler(void *handle);
 DrvStatusTypeDef BSP_GYRO_IsInitialized(void *handle, uint8_t *status);
 DrvStatusTypeDef BSP_GYRO_Get_Instance(void *handle, uint8_t *instance);
 DrvStatusTypeDef BSP_GYRO_Get_Axes(void *handle, SensorAxes_t *angular_velocity);
+
+/* Sensor Configuration Functions */
+DrvStatusTypeDef BSP_MAGNETO_Init( MAGNETO_ID_t id, void **handle );
+DrvStatusTypeDef BSP_LSM303AGR_MAGNETO_Init( void **handle );
+SensorAxes_t Magneto_Sensor_Handler( void *handle );
+DrvStatusTypeDef BSP_MAGNETO_Sensor_Enable( void *handle );
+DrvStatusTypeDef BSP_MAGNETO_IsInitialized( void *handle, uint8_t *status );
+DrvStatusTypeDef BSP_MAGNETO_Get_Instance( void *handle, uint8_t *instance );
+DrvStatusTypeDef BSP_MAGNETO_Get_Axes( void *handle, SensorAxes_t *magnetic_field );
+
+
 
 uint8_t Sensor_IO_SPI_CS_Init(void *handle);
 DrvStatusTypeDef Sensor_IO_SPI_Init(void);

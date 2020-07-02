@@ -28,6 +28,8 @@
 #include "usbd_cdc_if.h"
 #include "LSM6DSM_ACC_GYRO_driver_HL.h"
 #include "LSM6DSM_ACC_GYRO_driver.h"
+#include "LSM303AGR_MAG_driver_HL.h"
+#include "LSM303AGR_MAG_driver.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -55,6 +57,7 @@ UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
 SPI_HandleTypeDef SPI_Sensor_Handle;
+
 static DrvContextTypeDef ACCELERO_SensorHandle[2];
 static ACCELERO_Data_t ACCELERO_Data[2]; // Accelerometer - all.
 static void *LSM6DSM_X_0_handle = NULL;
@@ -64,6 +67,12 @@ static DrvContextTypeDef GYRO_SensorHandle[1];
 static GYRO_Data_t GYRO_Data[1]; // Gyroscope - all.
 static LSM6DSM_G_Data_t LSM6DSM_G_0_Data; // Gyroscope - sensor 0.
 static void *LSM6DSM_G_0_handle = NULL;
+
+
+static DrvContextTypeDef MAGNETO_SensorHandle[ 1 ];
+static MAGNETO_Data_t MAGNETO_Data[ 1 ]; // Magnetometer - all.
+static LSM303AGR_M_Data_t LSM303AGR_M_0_Data; // Magnetometer - sensor 0.
+static void *LSM303AGR_M_0_handle = NULL;
 
 /* USER CODE END PV */
 
@@ -86,7 +95,7 @@ uint16_t ADC_Get_Value(void);
 uint32_t ADC_Value = 0;
 uint8_t count = 0;
 
-int32_t Value_Buf[8];
+int32_t Value_Buf[11];
 int32_t t1;
 /* USER CODE END 0 */
 
@@ -136,14 +145,21 @@ int main(void) {
 			;
 	}
 
+	if (BSP_MAGNETO_Init(LSM303AGR_M_0, &LSM303AGR_M_0_handle) != COMPONENT_OK) {
+			while (1)
+				;
+		}
+
 	// Enable sensor
 	BSP_ACCELERO_Sensor_Enable(LSM6DSM_X_0_handle);
 	BSP_GYRO_Sensor_Enable(LSM6DSM_G_0_handle);
+	BSP_MAGNETO_Sensor_Enable(LSM303AGR_M_0_handle);
 
-	ESP_Init("penis", "12345678", "192.168.43.141");
+	ESP_Init("FiOS-1NOZN", "6905straw8943hoot", "192.168.1.229");
 
 	SensorAxes_t accel;
 	SensorAxes_t gyro;
+	SensorAxes_t mag;
 	uint32_t t2;
 	char time[100];
 	char data[200];
@@ -158,6 +174,7 @@ int main(void) {
 		t1 = HAL_GetTick();
 		accel = Accelero_Sensor_Handler(LSM6DSM_X_0_handle);
 		gyro = Gyro_Sensor_Handler(LSM6DSM_G_0_handle);
+		mag = Magneto_Sensor_Handler(LSM303AGR_M_0_handle);
 		ADC_Value = ADC_Get_Value();
 //		Voltage = ((float) ADC_Value * 3.3 / 4095);
 		count++;
@@ -169,6 +186,9 @@ int main(void) {
 		Value_Buf[5] = (int32_t) gyro.AXIS_X;
 		Value_Buf[6] = (int32_t) gyro.AXIS_Y;
 		Value_Buf[7] = (int32_t) gyro.AXIS_Z;
+		Value_Buf[8] = (int32_t) mag.AXIS_X;
+		Value_Buf[9] = (int32_t) mag.AXIS_Y;
+		Value_Buf[10] =	(int32_t) mag.AXIS_Z;
 		ESP_Send_Multi(Value_Buf);
 		HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_12);
 
@@ -179,7 +199,6 @@ int main(void) {
 //		sprintf(data, "EMG:%d\r\n", ADC_Value, Value_Buf[5], Value_Buf[6],
 //				Value_Buf[7]);
 //		Uart_debug_sendstring(data);
-//		HAL_Delay(50);
 //        HAL_Delay(15000);
 	}
 	/* USER CODE END 3 */
@@ -537,6 +556,33 @@ DrvStatusTypeDef BSP_GYRO_Init(GYRO_ID_t id, void **handle) {
 	return COMPONENT_OK;
 }
 
+/**
+ * @brief Initialize a magnetometer sensor
+ * @param id the magnetometer sensor identifier
+ * @param handle the device handle
+ * @retval COMPONENT_OK in case of success
+ * @retval COMPONENT_ERROR in case of failure
+ */
+DrvStatusTypeDef BSP_MAGNETO_Init( MAGNETO_ID_t id, void **handle )
+{
+
+  *handle = NULL;
+
+  switch((int)id)
+  {
+    case LSM303AGR_M_0:
+    {
+      if( BSP_LSM303AGR_MAGNETO_Init(handle)  == COMPONENT_ERROR )
+      {
+        return COMPONENT_ERROR;
+      }
+      break;
+    }
+  }
+
+  return COMPONENT_OK;
+}
+
 DrvStatusTypeDef BSP_LSM6DSM_ACCELERO_Init(void **handle) {
 	ACCELERO_Drv_t *driver = NULL;
 	uint8_t data = 0x0C;
@@ -670,6 +716,78 @@ DrvStatusTypeDef BSP_LSM6DSM_GYRO_Init(void **handle) {
 	return COMPONENT_OK;
 }
 
+DrvStatusTypeDef BSP_LSM303AGR_MAGNETO_Init( void **handle )
+{
+  MAGNETO_Drv_t *driver = NULL;
+  uint8_t data = 0x01;
+
+  if(MAGNETO_SensorHandle[ LSM303AGR_M_0 ].isInitialized == 1)
+  {
+    /* We have reached the max num of instance for this component */
+    return COMPONENT_ERROR;
+  }
+
+  if ( Sensor_IO_SPI_Init() == COMPONENT_ERROR )
+  {
+    return COMPONENT_ERROR;
+  }
+
+  /* Setup sensor handle. */
+  MAGNETO_SensorHandle[ LSM303AGR_M_0 ].who_am_i      = LSM303AGR_MAG_WHO_AM_I;
+  MAGNETO_SensorHandle[ LSM303AGR_M_0 ].ifType        = 1; // SPI interface
+  MAGNETO_SensorHandle[ LSM303AGR_M_0 ].address       = LSM303AGR_MAG_I2C_ADDRESS;
+  MAGNETO_SensorHandle[ LSM303AGR_M_0 ].spiDevice     = LSM303AGR_M;
+  MAGNETO_SensorHandle[ LSM303AGR_M_0 ].instance      = LSM303AGR_M_0;
+  MAGNETO_SensorHandle[ LSM303AGR_M_0 ].isInitialized = 0;
+  MAGNETO_SensorHandle[ LSM303AGR_M_0 ].isEnabled     = 0;
+  MAGNETO_SensorHandle[ LSM303AGR_M_0 ].isCombo       = 0;
+  MAGNETO_SensorHandle[ LSM303AGR_M_0 ].pData         = ( void * )&MAGNETO_Data[ LSM303AGR_M_0 ];
+  MAGNETO_SensorHandle[ LSM303AGR_M_0 ].pVTable       = ( void * )&LSM303AGR_M_Drv;
+  MAGNETO_SensorHandle[ LSM303AGR_M_0 ].pExtVTable    = 0;
+
+//  LSM303AGR_M_0_Data.comboData = &LSM303AGR_Combo_Data[0];
+  MAGNETO_Data[ LSM303AGR_M_0 ].pComponentData = ( void * )&LSM303AGR_M_0_Data;
+  MAGNETO_Data[ LSM303AGR_M_0 ].pExtData       = 0;
+
+  *handle = (void *)&MAGNETO_SensorHandle[ LSM303AGR_M_0 ];
+
+  Sensor_IO_SPI_CS_Init(*handle);
+
+ /* if(LSM303AGR_Combo_Data[0].isAccInitialized == 0)
+  {
+    // SPI Serial Interface Mode selection --> 3Wires
+    if( Sensor_IO_Write(*handle, 0X23, &data, 1) )
+    {
+      return COMPONENT_ERROR;
+    }
+  }
+*/
+  driver = ( MAGNETO_Drv_t * )((DrvContextTypeDef *)(*handle))->pVTable;
+
+  if ( driver->Init == NULL )
+  {
+    memset((*handle), 0, sizeof(DrvContextTypeDef));
+    *handle = NULL;
+    return COMPONENT_ERROR;
+  }
+
+  if ( driver->Init( (DrvContextTypeDef *)(*handle) ) == COMPONENT_ERROR )
+  {
+    memset((*handle), 0, sizeof(DrvContextTypeDef));
+    *handle = NULL;
+    return COMPONENT_ERROR;
+  }
+
+  /* Disable I2C interface */
+  if ( LSM303AGR_MAG_W_I2C_DIS( *handle, LSM303AGR_MAG_I2C_DISABLED ) == MEMS_ERROR )
+  {
+    return COMPONENT_ERROR;
+  }
+
+  return COMPONENT_OK;
+}
+
+
 uint8_t Sensor_IO_SPI_CS_Enable(void *handle) {
 	DrvContextTypeDef *ctx = (DrvContextTypeDef *) handle;
 
@@ -678,6 +796,9 @@ uint8_t Sensor_IO_SPI_CS_Enable(void *handle) {
 		HAL_GPIO_WritePin(SENSORTILE_LSM6DSM_SPI_CS_Port,
 		SENSORTILE_LSM6DSM_SPI_CS_Pin, GPIO_PIN_RESET);
 		break;
+	case LSM303AGR_M:
+	    HAL_GPIO_WritePin(SENSORTILE_LSM303AGR_M_SPI_CS_Port, SENSORTILE_LSM303AGR_M_SPI_CS_Pin, GPIO_PIN_RESET);
+	    break;
 	}
 	return COMPONENT_OK;
 }
@@ -689,6 +810,9 @@ uint8_t Sensor_IO_SPI_CS_Disable(void *handle) {
 		HAL_GPIO_WritePin(SENSORTILE_LSM6DSM_SPI_CS_Port,
 		SENSORTILE_LSM6DSM_SPI_CS_Pin, GPIO_PIN_SET);
 		break;
+	case LSM303AGR_M:
+	    HAL_GPIO_WritePin(SENSORTILE_LSM303AGR_M_SPI_CS_Port, SENSORTILE_LSM303AGR_M_SPI_CS_Pin, GPIO_PIN_SET);
+	    break;
 	}
 	return COMPONENT_OK;
 }
@@ -710,6 +834,13 @@ uint8_t Sensor_IO_SPI_CS_Init(void *handle) {
 		SENSORTILE_LSM6DSM_SPI_CS_Pin, GPIO_PIN_SET);
 		HAL_GPIO_Init(SENSORTILE_LSM6DSM_SPI_CS_Port, &GPIO_InitStruct);
 		break;
+	case LSM303AGR_M:
+	    SENSORTILE_LSM303AGR_M_SPI_CS_GPIO_CLK_ENABLE();
+	    GPIO_InitStruct.Pin = SENSORTILE_LSM303AGR_M_SPI_CS_Pin;
+	    /* Set the pin before init to avoid glitch */
+	    HAL_GPIO_WritePin(SENSORTILE_LSM303AGR_M_SPI_CS_Port, SENSORTILE_LSM303AGR_M_SPI_CS_Pin, GPIO_PIN_SET);
+	    HAL_GPIO_Init(SENSORTILE_LSM303AGR_M_SPI_CS_Port, &GPIO_InitStruct);
+	    break;
 
 	default:
 		return COMPONENT_NOT_IMPLEMENTED;
@@ -772,6 +903,40 @@ DrvStatusTypeDef BSP_GYRO_Sensor_Enable(void *handle) {
 
 	return COMPONENT_OK;
 }
+
+/**
+ * @brief Enable magnetometer sensor
+ * @param handle the device handle
+ * @retval COMPONENT_OK in case of success
+ * @retval COMPONENT_ERROR in case of failure
+ */
+DrvStatusTypeDef BSP_MAGNETO_Sensor_Enable( void *handle )
+{
+
+  DrvContextTypeDef *ctx = (DrvContextTypeDef *)handle;
+  MAGNETO_Drv_t *driver = NULL;
+
+  if(ctx == NULL)
+  {
+    return COMPONENT_ERROR;
+  }
+
+  driver = ( MAGNETO_Drv_t * )ctx->pVTable;
+
+  if ( driver->Sensor_Enable == NULL )
+  {
+    return COMPONENT_ERROR;
+  }
+
+  if ( driver->Sensor_Enable( ctx ) == COMPONENT_ERROR )
+  {
+    return COMPONENT_ERROR;
+  }
+
+  return COMPONENT_OK;
+}
+
+
 
 /**
  * @brief  Handles the accelerometer axes data getting/sending
@@ -837,6 +1002,44 @@ SensorAxes_t Gyro_Sensor_Handler(void *handle) {
 	return angular_velocity;
 }
 
+
+/**
+* @brief  Handles the magneto axes data getting/sending
+* @param  handle the device handle
+* @retval None
+*/
+SensorAxes_t Magneto_Sensor_Handler( void *handle )
+{
+
+	char dataOut[256];
+	//uint8_t who_am_i;
+	// float odr;
+	//float fullScale;
+	uint8_t id;
+	SensorAxes_t magnetic_field;
+	uint8_t status;
+	//int32_t d1, d2;
+
+  BSP_MAGNETO_Get_Instance( handle, &id );
+
+  BSP_MAGNETO_IsInitialized( handle, &status );
+
+  if ( status == 1 )
+  {
+    if ( BSP_MAGNETO_Get_Axes( handle, &magnetic_field ) == COMPONENT_ERROR )
+    {
+      magnetic_field.AXIS_X = 0;
+      magnetic_field.AXIS_Y = 0;
+      magnetic_field.AXIS_Z = 0;
+    }
+	sprintf(dataOut, "mag: %d, %d, %d\r\n", (int) magnetic_field.AXIS_X,
+				(int) magnetic_field.AXIS_Y, (int) magnetic_field.AXIS_Z);
+		CDC_Transmit_FS((uint8_t*) dataOut, strlen(dataOut));
+  }
+  return magnetic_field;
+}
+
+
 /**
  * @brief Get the accelerometer sensor instance
  * @param handle the device handle
@@ -860,6 +1063,7 @@ DrvStatusTypeDef BSP_ACCELERO_Get_Instance(void *handle, uint8_t *instance) {
 	return COMPONENT_OK;
 }
 
+
 /**
  * @brief Get the gyroscope sensor instance
  * @param handle the device handle
@@ -881,6 +1085,32 @@ DrvStatusTypeDef BSP_GYRO_Get_Instance(void *handle, uint8_t *instance) {
 	*instance = ctx->instance;
 
 	return COMPONENT_OK;
+}
+
+/**
+ * @brief Get the magnetometer sensor instance
+ * @param handle the device handle
+ * @param instance the pointer to the device instance
+ * @retval COMPONENT_OK in case of success
+ * @retval COMPONENT_ERROR in case of failure
+ */
+DrvStatusTypeDef BSP_MAGNETO_Get_Instance( void *handle, uint8_t *instance )
+{
+  DrvContextTypeDef *ctx = (DrvContextTypeDef *)handle;
+
+  if(ctx == NULL)
+  {
+    return COMPONENT_ERROR;
+  }
+
+  if ( instance == NULL )
+  {
+    return COMPONENT_ERROR;
+  }
+
+  *instance = ctx->instance;
+
+  return COMPONENT_OK;
 }
 
 /**
@@ -928,6 +1158,34 @@ DrvStatusTypeDef BSP_GYRO_IsInitialized(void *handle, uint8_t *status) {
 
 	return COMPONENT_OK;
 }
+
+
+/**
+ * @brief Check if the magnetometer sensor is initialized
+ * @param handle the device handle
+ * @param status the pointer to the initialization status
+ * @retval COMPONENT_OK in case of success
+ * @retval COMPONENT_ERROR in case of failure
+ */
+DrvStatusTypeDef BSP_MAGNETO_IsInitialized( void *handle, uint8_t *status )
+{
+  DrvContextTypeDef *ctx = (DrvContextTypeDef *)handle;
+
+  if(ctx == NULL)
+  {
+    return COMPONENT_ERROR;
+  }
+
+  if ( status == NULL )
+  {
+    return COMPONENT_ERROR;
+  }
+
+  *status = ctx->isInitialized;
+
+  return COMPONENT_OK;
+}
+
 
 /**
  * @brief Get the accelerometer sensor axes
@@ -991,6 +1249,43 @@ DrvStatusTypeDef BSP_GYRO_Get_Axes(void *handle, SensorAxes_t *angular_velocity)
 	}
 
 	return COMPONENT_OK;
+}
+
+
+/**
+ * @brief Get the magnetometer sensor axes
+ * @param handle the device handle
+ * @param magnetic_field pointer where the values of the axes are written [mgauss]
+ * @retval COMPONENT_OK in case of success
+ * @retval COMPONENT_ERROR in case of failure
+ */
+DrvStatusTypeDef BSP_MAGNETO_Get_Axes( void *handle, SensorAxes_t *magnetic_field )
+{
+
+  DrvContextTypeDef *ctx = (DrvContextTypeDef *)handle;
+  MAGNETO_Drv_t *driver = NULL;
+
+  if(ctx == NULL)
+  {
+    return COMPONENT_ERROR;
+  }
+
+  driver = ( MAGNETO_Drv_t * )ctx->pVTable;
+
+  if ( magnetic_field == NULL )
+  {
+    return COMPONENT_ERROR;
+  }
+  if ( driver->Get_Axes == NULL )
+  {
+    return COMPONENT_ERROR;
+  }
+  if ( driver->Get_Axes( ctx, magnetic_field ) == COMPONENT_ERROR )
+  {
+    return COMPONENT_ERROR;
+  }
+
+  return COMPONENT_OK;
 }
 
 /**

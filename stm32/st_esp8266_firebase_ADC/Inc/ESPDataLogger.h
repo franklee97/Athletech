@@ -13,6 +13,6 @@
  * and connects to a proxy server with IP address Server_IP
  */
 void ESP_Init(char *SSID, char *PASSWD, char *Server_IP);
-void ESP_Send_Multi(int value[]);
+void ESP_Send_Multi(int32_t value[]);
 void Uart_debug_sendstring(char* input);
 #endif /* INC_ESPDATALOGGER_H_ */

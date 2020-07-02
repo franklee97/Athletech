@@ -66,7 +66,7 @@ void ESP_Init(char *SSID, char *PASSWD, char *Server_IP) {
 	while (!(Wait_for("OK\r\n")))
 		;
 	Uart_debug_sendstring("OK\r\n\r\n");
-	sprintf(data, "AT+CIPSTART=\"TCP\",\"%s\",8080\r\n", Server_IP);
+	sprintf(data, "AT+CIPSTART=\"TCP\",\"%s\",8081\r\n", Server_IP);
 	Uart_sendstring(data);
 	sprintf(data, "Connecting to local server hosted on %s--->", Server_IP);
 	Uart_debug_sendstring(data);
@@ -77,15 +77,16 @@ void ESP_Init(char *SSID, char *PASSWD, char *Server_IP) {
 
 }
 
-void ESP_Send_Multi(int value[]) {
+void ESP_Send_Multi(int32_t value[]) {
 	char data[80];
 
 	char local_buf[500] = { 0 };        // AT+CIPSEND=n
 	char field_buf[500] = { 0 };        // Actual data
 
-
-	sprintf(field_buf, "EMG:%d,FSR:%d,IMU-X:%d,IMU-Y:%d, IMU-Z:%d, G-X:%d, G-Y:%d, G-Z:%d", value[0], value[1],
-			value[2], value[3], value[4], value[5],value[6],value[7]);
+	sprintf(field_buf,
+			"EMG:%d,FSR:%d,IMU-X:%d,IMU-Y:%d, IMU-Z:%d, G-X:%d, G-Y:%d, G-Z:%d",
+			value[0], value[1], value[2], value[3], value[4], value[5],
+			value[6], value[7]);
 	int len = strlen(field_buf);
 
 	sprintf(local_buf, "AT+CIPSEND=%d\r\n", len);

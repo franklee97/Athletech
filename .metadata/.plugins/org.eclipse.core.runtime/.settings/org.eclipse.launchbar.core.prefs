@@ -1,8 +1,10 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=org.eclipse.launchbar.core.descriptorType.default\:st_esp8266_test Debug,org.eclipse.launchbar.core.descriptorType.default\:STM32L4xx-SensorTile Debug,org.eclipse.launchbar.core.descriptorType.default\:st_esp8266_firebase_ADC Debug,org.eclipse.launchbar.core.descriptorType.default\:datalog_accel_test Debug
+configDescList=org.eclipse.launchbar.core.descriptorType.default\:st_esp8266_test Debug,org.eclipse.launchbar.core.descriptorType.default\:datalog_accel_test Debug,org.eclipse.launchbar.core.descriptorType.default\:SENSORS_READ Debug,org.eclipse.launchbar.core.descriptorType.default\:STEVAL-WESU1 Debug,org.eclipse.launchbar.core.descriptorType.default\:ADC_Test Debug,org.eclipse.launchbar.core.descriptorType.default\:STM32L4xx-SensorTile Debug,org.eclipse.launchbar.core.descriptorType.default\:st_esp8266_firebase_ADC Debug
 eclipse.preferences.version=1
 org.eclipse.launchbar.core.descriptorType.default\:STM32L4xx-SensorTile\ Debug/activeLaunchMode=run
 org.eclipse.launchbar.core.descriptorType.default\:STM32L4xx-SensorTile\ Debug/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
+org.eclipse.launchbar.core.descriptorType.default\:datalog_accel_test\ Debug/activeLaunchMode=run
+org.eclipse.launchbar.core.descriptorType.default\:datalog_accel_test\ Debug/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
 org.eclipse.launchbar.core.descriptorType.default\:st_esp8266_firebase_ADC\ Debug/activeLaunchMode=debug
 org.eclipse.launchbar.core.descriptorType.default\:st_esp8266_firebase_ADC\ Debug/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local

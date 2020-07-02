@@ -1,0 +1,6 @@
+17:35:43 **** Incremental Build of configuration Debug for project STEVAL-WESU1 ****
+make -j8 all 
+make: Nothing to be done for 'all'.
+
+17:35:43 Build Finished (took 556ms)
+

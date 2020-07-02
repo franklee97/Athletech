@@ -29,14 +29,14 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l4xx_hal.h"
+
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
 #include "accelerometer.h"
 #include "gyroscope.h"
 #include "LSM6DSM_ACC_GYRO_driver_HL.h"
 #include "LSM6DSM_ACC_GYRO_driver.h"
 #include "spi_helper.h"
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -88,13 +88,10 @@ typedef enum {
 	LSM303AGR_X_0 /* . */
 } ACCELERO_ID_t;
 
-
-typedef enum
-{
-  GYRO_SENSORS_AUTO = -1,        /* Always first element and equal to -1 */
-  LSM6DSM_G_0,                   /* Default on board. */
+typedef enum {
+	GYRO_SENSORS_AUTO = -1, /* Always first element and equal to -1 */
+	LSM6DSM_G_0, /* Default on board. */
 } GYRO_ID_t;
-
 
 typedef enum {
 //  TEMPERATURE_SENSORS_AUTO = -1, /* Always first element and equal to -1 */
@@ -114,13 +111,13 @@ DrvStatusTypeDef BSP_ACCELERO_Get_Instance(void *handle, uint8_t *instance);
 DrvStatusTypeDef BSP_ACCELERO_IsInitialized(void *handle, uint8_t *status);
 DrvStatusTypeDef BSP_ACCELERO_Get_Axes(void *handle, SensorAxes_t *acceleration);
 
-DrvStatusTypeDef BSP_GYRO_Init( GYRO_ID_t id, void **handle );
-DrvStatusTypeDef BSP_LSM6DSM_GYRO_Init( void **handle );
-DrvStatusTypeDef BSP_GYRO_Sensor_Enable( void *handle );
-SensorAxes_t Gyro_Sensor_Handler( void *handle );
-DrvStatusTypeDef BSP_GYRO_IsInitialized( void *handle, uint8_t *status );
-DrvStatusTypeDef BSP_GYRO_Get_Instance( void *handle, uint8_t *instance );
-DrvStatusTypeDef BSP_GYRO_Get_Axes( void *handle, SensorAxes_t *angular_velocity );
+DrvStatusTypeDef BSP_GYRO_Init(GYRO_ID_t id, void **handle);
+DrvStatusTypeDef BSP_LSM6DSM_GYRO_Init(void **handle);
+DrvStatusTypeDef BSP_GYRO_Sensor_Enable(void *handle);
+SensorAxes_t Gyro_Sensor_Handler(void *handle);
+DrvStatusTypeDef BSP_GYRO_IsInitialized(void *handle, uint8_t *status);
+DrvStatusTypeDef BSP_GYRO_Get_Instance(void *handle, uint8_t *instance);
+DrvStatusTypeDef BSP_GYRO_Get_Axes(void *handle, SensorAxes_t *angular_velocity);
 
 uint8_t Sensor_IO_SPI_CS_Init(void *handle);
 DrvStatusTypeDef Sensor_IO_SPI_Init(void);

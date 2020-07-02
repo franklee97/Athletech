@@ -1,0 +1,6 @@
+17:34:26 **** Incremental Build of configuration Debug for project SENSORS_READ ****
+make -j8 all 
+make: Nothing to be done for 'all'.
+
+17:34:27 Build Finished (took 566ms)
+
